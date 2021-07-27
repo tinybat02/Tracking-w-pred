@@ -56618,12 +56618,6 @@ var PanelEditor = function PanelEditor(_a) {
     });
   };
 
-  var handleClick = function handleClick(e) {
-    setInputs(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, inputs), {
-      showRadius: !inputs.showRadius
-    }));
-  };
-
   var handleSubmit = function handleSubmit() {
     onOptionsChange(inputs);
   };
@@ -56659,14 +56653,6 @@ var PanelEditor = function PanelEditor(_a) {
     value: inputs.tile_url,
     onChange: handleChange
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-    label: "2nd Tile",
-    labelWidth: 10,
-    inputWidth: 80,
-    type: "text",
-    name: "tile_other",
-    value: inputs.tile_other,
-    onChange: handleChange
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
     label: "Initial Zoom",
     labelWidth: 10,
     inputWidth: 40,
@@ -56674,27 +56660,7 @@ var PanelEditor = function PanelEditor(_a) {
     name: "zoom_level",
     value: inputs.zoom_level,
     onChange: handleChange
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
-    label: "Other Floor",
-    labelWidth: 10,
-    inputWidth: 40,
-    type: "number",
-    name: "other_floor",
-    value: inputs.other_floor,
-    onChange: handleChange
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "gf-form"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    className: "gf-form-label width-10"
-  }, "Enable Circle"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "gf-form-switch",
-    onClick: handleClick
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-    type: "checkbox",
-    checked: inputs.showRadius
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-    className: "gf-form-switch__slider"
-  }))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "btn btn-primary",
     onClick: handleSubmit
   }, "Submit"));
@@ -57175,10 +57141,7 @@ var defaults = {
   center_lat: 48.262725,
   center_lon: 11.66725,
   tile_url: '',
-  tile_other: '',
-  zoom_level: 18,
-  other_floor: 1,
-  showRadius: true
+  zoom_level: 18
 };
 
 /***/ }),

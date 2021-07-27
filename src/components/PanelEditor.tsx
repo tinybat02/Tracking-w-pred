@@ -16,10 +16,6 @@ export const PanelEditor: React.FC<PanelEditorProps<MapOptions>> = ({ options, o
     }));
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    setInputs({ ...inputs, showRadius: !inputs.showRadius });
-  };
-
   const handleSubmit = () => {
     onOptionsChange(inputs);
   };
@@ -57,15 +53,6 @@ export const PanelEditor: React.FC<PanelEditorProps<MapOptions>> = ({ options, o
             onChange={handleChange}
           />
           <FormField
-            label="2nd Tile"
-            labelWidth={10}
-            inputWidth={80}
-            type="text"
-            name="tile_other"
-            value={inputs.tile_other}
-            onChange={handleChange}
-          />
-          <FormField
             label="Initial Zoom"
             labelWidth={10}
             inputWidth={40}
@@ -74,23 +61,6 @@ export const PanelEditor: React.FC<PanelEditorProps<MapOptions>> = ({ options, o
             value={inputs.zoom_level}
             onChange={handleChange}
           />
-          <FormField
-            label="Other Floor"
-            labelWidth={10}
-            inputWidth={40}
-            type="number"
-            name="other_floor"
-            value={inputs.other_floor}
-            onChange={handleChange}
-          />
-
-          <div className="gf-form">
-            <label className="gf-form-label width-10">Enable Circle</label>
-            <div className="gf-form-switch" onClick={handleClick}>
-              <input type="checkbox" checked={inputs.showRadius} />
-              <span className="gf-form-switch__slider"></span>
-            </div>
-          </div>
         </div>
       </div>
 
