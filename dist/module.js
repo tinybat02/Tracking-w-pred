@@ -56328,15 +56328,17 @@ function (_super) {
       }, function () {
         _this.map.removeLayer(_this.partialRoute);
 
-        var linesFeature = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_10__["createLineWithLabel"])(_this.routeData, value);
-        _this.partialRoute = new ol_layer__WEBPACK_IMPORTED_MODULE_4__["Vector"]({
-          source: new ol_source_Vector__WEBPACK_IMPORTED_MODULE_5__["default"]({
-            features: linesFeature
-          }),
-          zIndex: 2
-        });
+        if (_this.state.routeLength > 2) {
+          var linesFeature = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_10__["createLineWithLabel"])(_this.routeData, value);
+          _this.partialRoute = new ol_layer__WEBPACK_IMPORTED_MODULE_4__["Vector"]({
+            source: new ol_source_Vector__WEBPACK_IMPORTED_MODULE_5__["default"]({
+              features: linesFeature
+            }),
+            zIndex: 2
+          });
 
-        _this.map.addLayer(_this.partialRoute);
+          _this.map.addLayer(_this.partialRoute);
+        }
       });
     };
 
@@ -56558,7 +56560,7 @@ function (_super) {
         padding: 10,
         marginRight: 10
       }
-    }, !showTotalRoute && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_common_CustomSlider__WEBPACK_IMPORTED_MODULE_11__["CustomSlider"], {
+    }, !showTotalRoute && routeLength >= 2 && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_common_CustomSlider__WEBPACK_IMPORTED_MODULE_11__["CustomSlider"], {
       initialValue: 0,
       onSliding: this.onSliding,
       onSlider: this.onSlider,
@@ -57024,6 +57026,25 @@ var generatePureLine = function generatePureLine(coord1, coord2, color, rotate, 
   return lineFeature;
 };
 
+var generateDistanceLine = function generateDistanceLine(coord1, coord2, distance) {
+  var lineFeature = new ol_Feature__WEBPACK_IMPORTED_MODULE_0__["default"](new ol_geom_LineString__WEBPACK_IMPORTED_MODULE_2__["default"]([coord1, coord2]).transform('EPSG:4326', 'EPSG:3857'));
+  lineFeature.setStyle([new ol_style__WEBPACK_IMPORTED_MODULE_4__["Style"]({
+    stroke: new ol_style__WEBPACK_IMPORTED_MODULE_4__["Stroke"]({
+      color: '#666',
+      width: 2
+    }),
+    text: new ol_style__WEBPACK_IMPORTED_MODULE_4__["Text"]({
+      stroke: new ol_style__WEBPACK_IMPORTED_MODULE_4__["Stroke"]({
+        color: '#fff',
+        width: 2
+      }),
+      font: '18px Calibri,sans-serif',
+      text: distance
+    })
+  })]);
+  return lineFeature;
+};
+
 var createAllLines = function createAllLines(routeData) {
   var totalRoute = [];
 
@@ -57034,7 +57055,8 @@ var createAllLines = function createAllLines(routeData) {
 
     var line1 = generatePureLine([routeData[i].longitude, routeData[i].latitude], [routeData[i + 1].longitude, routeData[i + 1].latitude], 'rgba(73,168,222)', rotation1, _img_arrow_png__WEBPACK_IMPORTED_MODULE_5___default.a);
     var line2 = generatePureLine([routeData[i].longitude_pred, routeData[i].latitude_pred], [routeData[i + 1].longitude_pred, routeData[i + 1].latitude_pred], 'rgba(255,176,0)', rotation2, _img_arrow1_png__WEBPACK_IMPORTED_MODULE_6___default.a);
-    totalRoute.push(line1, line2);
+    var errorLine = generateDistanceLine([routeData[i].longitude, routeData[i].latitude], [routeData[i].longitude_pred, routeData[i].latitude_pred], routeData[i].error.toFixed(2));
+    totalRoute.push(line1, line2, errorLine);
   }
 
   return totalRoute;

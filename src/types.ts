@@ -20,6 +20,7 @@ export interface Record {
   latitude_pred: number;
   longitude_pred: number;
   timestamp: number;
+  error: number;
 }
 
 export interface Buffer extends VectorData {

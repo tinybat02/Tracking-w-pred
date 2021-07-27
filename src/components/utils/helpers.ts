@@ -79,6 +79,29 @@ const generatePureLine = (coord1: Coordinate, coord2: Coordinate, color: string,
   return lineFeature;
 };
 
+const generateDistanceLine = (coord1: Coordinate, coord2: Coordinate, distance: string) => {
+  const lineFeature = new Feature(new LineString([coord1, coord2]).transform('EPSG:4326', 'EPSG:3857'));
+
+  lineFeature.setStyle([
+    new Style({
+      stroke: new Stroke({
+        color: '#666',
+        width: 2,
+      }),
+      text: new Text({
+        stroke: new Stroke({
+          color: '#fff',
+          width: 2,
+        }),
+        font: '18px Calibri,sans-serif',
+        text: distance,
+      }),
+    }),
+  ]);
+
+  return lineFeature;
+};
+
 export const createAllLines = (routeData: Record[]) => {
   const totalRoute: Feature[] = [];
   for (let i = 0; i < routeData.length - 1; i++) {
@@ -100,8 +123,15 @@ export const createAllLines = (routeData: Record[]) => {
       Arrow1
     );
 
-    totalRoute.push(line1, line2);
+    const errorLine = generateDistanceLine(
+      [routeData[i].longitude, routeData[i].latitude],
+      [routeData[i].longitude_pred, routeData[i].latitude_pred],
+      routeData[i].error.toFixed(2)
+    );
+
+    totalRoute.push(line1, line2, errorLine);
   }
+
   return totalRoute;
 };
 

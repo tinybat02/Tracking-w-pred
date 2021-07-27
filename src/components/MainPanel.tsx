@@ -224,15 +224,17 @@ export class MainPanel extends PureComponent<Props> {
     this.setState({ iterRoute: value }, () => {
       this.map.removeLayer(this.partialRoute);
 
-      const linesFeature = createLineWithLabel(this.routeData, value);
+      if (this.state.routeLength > 2) {
+        const linesFeature = createLineWithLabel(this.routeData, value);
 
-      this.partialRoute = new VectorLayer({
-        source: new VectorSource({
-          features: linesFeature,
-        }),
-        zIndex: 2,
-      });
-      this.map.addLayer(this.partialRoute);
+        this.partialRoute = new VectorLayer({
+          source: new VectorSource({
+            features: linesFeature,
+          }),
+          zIndex: 2,
+        });
+        this.map.addLayer(this.partialRoute);
+      }
     });
   };
 
@@ -313,7 +315,7 @@ export class MainPanel extends PureComponent<Props> {
             </div>
           </div>
           <div style={{ width: '100%', padding: 10, marginRight: 10 }}>
-            {!showTotalRoute && (
+            {!showTotalRoute && routeLength >= 2 && (
               <CustomSlider
                 initialValue={0}
                 onSliding={this.onSliding}
