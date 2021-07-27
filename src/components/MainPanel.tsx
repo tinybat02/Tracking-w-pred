@@ -93,7 +93,6 @@ export class MainPanel extends PureComponent<Props> {
     const partialSource = createLineWithLabel(this.routeData, 0);
 
     const totalSource = createAllLines(this.routeData);
-    console.log('total Source ', totalSource);
 
     this.partialRoute = new VectorLayer({
       source: new VectorSource({

@@ -56423,7 +56423,6 @@ function (_super) {
     });
     var partialSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_10__["createLineWithLabel"])(this.routeData, 0);
     var totalSource = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_10__["createAllLines"])(this.routeData);
-    console.log('total Source ', totalSource);
     this.partialRoute = new ol_layer__WEBPACK_IMPORTED_MODULE_4__["Vector"]({
       source: new ol_source_Vector__WEBPACK_IMPORTED_MODULE_5__["default"]({
         features: partialSource
