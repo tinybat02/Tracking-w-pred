@@ -1,0 +1,25 @@
+{
+  "type": "panel",
+  "name": "Traj w Pred",
+  "id": "id-tracking-w-predict",
+  "dataFormats": ["table"],
+  "info": {
+    "description": "Tracking w Pred",
+    "author": {
+      "name": "Nam Le"
+    },
+    "keywords": ["trajectory"],
+    "logos": {
+      "small": "img/Traj.svg",
+      "large": "img/Traj.svg"
+    },
+    "screenshots": [],
+    "version": "0.0.1",
+    "updated": "2021-07-27"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "6.4.x",
+    "plugins": []
+  }
+}
