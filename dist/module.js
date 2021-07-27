@@ -57059,6 +57059,9 @@ var createAllLines = function createAllLines(routeData) {
     totalRoute.push(line1, line2, errorLine);
   }
 
+  var end = routeData.length - 1;
+  var lastErrorLine = generateDistanceLine([routeData[end].longitude, routeData[end].latitude], [routeData[end].longitude_pred, routeData[end].latitude_pred], routeData[end].error.toFixed(2));
+  totalRoute.push(lastErrorLine);
   return totalRoute;
 };
 var createLineWithLabel = function createLineWithLabel(routeData, iterRoute) {

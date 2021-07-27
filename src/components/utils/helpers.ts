@@ -132,6 +132,14 @@ export const createAllLines = (routeData: Record[]) => {
     totalRoute.push(line1, line2, errorLine);
   }
 
+  const end = routeData.length - 1;
+  const lastErrorLine = generateDistanceLine(
+    [routeData[end].longitude, routeData[end].latitude],
+    [routeData[end].longitude_pred, routeData[end].latitude_pred],
+    routeData[end].error.toFixed(2)
+  );
+  totalRoute.push(lastErrorLine);
+
   return totalRoute;
 };
 
